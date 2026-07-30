@@ -66,13 +66,12 @@
     <div id="lyrics" class="lyrics-box">Lyrics will appear here when a song starts...</div>
     <div id="status" class="status">Status: Idle</div>
 </div>
-
 <script>
     // -------------------------------------------------------------
     // REPLACE THESE TWO VALUES WITH YOUR ACTUAL LAST.FM DETAILS
     // -------------------------------------------------------------
-    const LASTFM_USERNAME = "devteen";
-    const LASTFM_API_KEY = "33f19091c83f80a71c41f92280d67002";
+    const LASTFM_USERNAME = "YOUR_LASTFM_USERNAME";
+    const LASTFM_API_KEY  = "YOUR_LASTFM_API_KEY";
     // -------------------------------------------------------------
 
     let currentTrackSignature = "";
@@ -84,7 +83,6 @@
         }
 
         try {
-            document.getElementById("status").innerText = "Checking Spotify status...";
             const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${LASTFM_USERNAME}&api_key=${LASTFM_API_KEY}&format=json&limit=1`;
             const res = await fetch(url);
             const data = await res.json();
@@ -97,14 +95,12 @@
                 const artistName = track.artist["#text"];
                 const signature = `${songTitle} - ${artistName}`;
 
-                // Only fetch lyrics if the song changed
+                // Only fetch lyrics if the song actually changed
                 if (signature !== currentTrackSignature) {
                     currentTrackSignature = signature;
                     document.getElementById("song-title").innerText = songTitle;
                     document.getElementById("artist-name").innerText = artistName;
                     fetchLyrics(artistName, songTitle);
-                } else {
-                    document.getElementById("status").innerText = "Sync active • Playing live";
                 }
             } else {
                 document.getElementById("song-title").innerText = "Nothing Playing";
@@ -115,31 +111,61 @@
             }
         } catch (err) {
             console.error(err);
-            document.getElementById("status").innerText = "Error fetching song data.";
+            document.getElementById("status").innerText = "Error checking Spotify status.";
         }
+    }
+
+    // Helper function to remove timestamps like [00:12.34] from synced lyrics
+    function cleanSyncedLyrics(syncedLyrics) {
+        if (!syncedLyrics) return "";
+        return syncedLyrics.replace(/\[\d{2}:\d{2}\.\d{2,3}\]\s?/g, "");
     }
 
     async function fetchLyrics(artist, track) {
         document.getElementById("lyrics").innerText = "Fetching lyrics...";
+        document.getElementById("status").innerText = "Searching lyrics database...";
+
+        // 1. Clean up title and artist (Remove "(Remastered)", "feat.", extra hyphens, etc.)
+        const cleanTrack = track.replace(/[\(\[\-].*?(remaster|feat|ft|deluxe|version|edition|live).*?[\)\]\-]/gi, "").trim();
+        const cleanArtist = artist.split(/[,&]/)[0].trim(); // Get primary artist only
+
         try {
-            const res = await fetch(`https://lrclib.net/api/get?artist_name=${encodeURIComponent(artist)}&track_name=${encodeURIComponent(track)}`);
+            // 2. Try exact match first
+            let res = await fetch(`https://lrclib.net/api/get?artist_name=${encodeURIComponent(cleanArtist)}&track_name=${encodeURIComponent(cleanTrack)}`);
+            
             if (res.ok) {
                 const data = await res.json();
-                document.getElementById("lyrics").innerText = data.plainLyrics || data.syncedLyrics || "No lyrics available.";
-            } else {
-                // Fallback search
-                const searchRes = await fetch(`https://lrclib.net/api/search?q=${encodeURIComponent(artist + " " + track)}`);
-                const searchData = await searchRes.json();
-                if (searchData.length > 0 && (searchData[0].plainLyrics || searchData[0].syncedLyrics)) {
-                    document.getElementById("lyrics").innerText = searchData[0].plainLyrics || searchData[0].syncedLyrics;
-                } else {
-                    document.getElementById("lyrics").innerText = "Lyrics not found for this song.";
+                const lyricsText = data.plainLyrics || cleanSyncedLyrics(data.syncedLyrics);
+                if (lyricsText) {
+                    document.getElementById("lyrics").innerText = lyricsText;
+                    document.getElementById("status").innerText = "Sync active • Lyrics Loaded";
+                    return;
                 }
             }
-            document.getElementById("status").innerText = "Sync active • Lyrics Loaded";
+
+            // 3. Fallback: Search endpoint if exact match fails
+            res = await fetch(`https://lrclib.net/api/search?q=${encodeURIComponent(cleanArtist + " " + cleanTrack)}`);
+            if (res.ok) {
+                const searchData = await res.json();
+                if (Array.isArray(searchData) && searchData.length > 0) {
+                    const match = searchData.find(item => item.plainLyrics || item.syncedLyrics);
+                    if (match) {
+                        const lyricsText = match.plainLyrics || cleanSyncedLyrics(match.syncedLyrics);
+                        document.getElementById("lyrics").innerText = lyricsText;
+                        document.getElementById("status").innerText = "Sync active • Lyrics Loaded";
+                        return;
+                    }
+                }
+            }
+
+            // 4. If no lyrics found anywhere
+            document.getElementById("lyrics").innerText = `No lyrics found for "${cleanTrack}" in the public database.`;
+            document.getElementById("status").innerText = "Sync active • Lyrics Not Found";
+
         } catch (err) {
-            console.error(err);
-            document.getElementById("lyrics").innerText = "Failed to load lyrics.";
+            console.error("Lyrics Error:", err);
+            document.getElementById("lyrics").innerText = "Failed to connect to lyrics server.";
+            document.getElementById("status").innerText = "Network Error";
         }
     }
 
@@ -147,6 +173,7 @@
     setInterval(checkCurrentSong, 5000);
     checkCurrentSong();
 </script>
+
 
 </body>
 </html>
