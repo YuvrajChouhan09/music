@@ -172,6 +172,51 @@
     // Check every 5 seconds
     setInterval(checkCurrentSong, 5000);
     checkCurrentSong();
+    async function fetchLyrics(artist, track) {
+    document.getElementById("lyrics").innerText = "Fetching lyrics...";
+    document.getElementById("status").innerText = "Searching lyrics database...";
+
+    // Clean track title and artist
+    const cleanTrack = track.replace(/[\(\[\-].*?(remaster|feat|ft|deluxe|version|edition|live).*?[\)\]\-]/gi, "").trim();
+    const cleanArtist = artist.split(/[,&]/)[0].trim();
+
+    try {
+        // Method 1: LRCLIB API with required client header
+        let response = await fetch(`https://lrclib.net/api/get?artist_name=${encodeURIComponent(cleanArtist)}&track_name=${encodeURIComponent(cleanTrack)}`, {
+            headers: { 'Lrclib-Client': 'Spotify-Lyrics-App v1.0' }
+        });
+
+        if (response.ok) {
+            let data = await response.json();
+            let lyricsText = data.plainLyrics || cleanSyncedLyrics(data.syncedLyrics);
+            if (lyricsText) {
+                document.getElementById("lyrics").innerText = lyricsText;
+                document.getElementById("status").innerText = "Sync active • Lyrics Loaded";
+                return;
+            }
+        }
+
+        // Method 2: Fallback to Lyrics.ovh API
+        let ovhResponse = await fetch(`https://api.lyrics.ovh/v1/${encodeURIComponent(cleanArtist)}/${encodeURIComponent(cleanTrack)}`);
+        if (ovhResponse.ok) {
+            let ovhData = await ovhResponse.json();
+            if (ovhData.lyrics) {
+                document.getElementById("lyrics").innerText = ovhData.lyrics;
+                document.getElementById("status").innerText = "Sync active • Lyrics Loaded (Backup)";
+                return;
+            }
+        }
+
+        document.getElementById("lyrics").innerText = `No lyrics found for "${cleanTrack}".`;
+        document.getElementById("status").innerText = "Sync active • Lyrics Not Found";
+
+    } catch (err) {
+        console.error("Lyrics Error:", err);
+        document.getElementById("lyrics").innerText = "Network blocked. Make sure your browser isn't blocking local file requests or turn off AdBlock.";
+        document.getElementById("status").innerText = "Network Error";
+    }
+}
+
 </script>
 
 
