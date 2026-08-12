@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full antialiased">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    
+    <!-- SEO Meta Tags -->
+    <title>Auto Rickshaw Player | Web Music Player</title>
+    <meta name="description" content="A seamless web-based music player. Listen to your favorite tracks with background play support and live iTunes metadata." />
+    <meta name="keywords" content="music player, web player, auto rickshaw, youtube audio, online music" />
+    <meta name="author" content="Auto Rickshaw Player" />
+    <meta name="theme-color" content="#1a1a1a" />
+
+    <!-- Open Graph / Social Media (Facebook, WhatsApp, Discord) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Auto Rickshaw Player" />
+    <meta property="og:description" content="A seamless web-based music player with background play support." />
+    <!-- Uses the first track's iTunes artwork as the sharing thumbnail -->
+    <meta property="og:image" content="https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/bf/16/e4/bf16e4db-f50f-e28a-77e8-b8ceea4bf0ba/886443372990.jpg/600x600bb.jpg" />
+    <meta property="og:url" content="https://yourwebsite.com/" /> <!-- Update with your actual URL -->
+
+    <!-- Twitter Meta Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Auto Rickshaw Player" />
+    <meta name="twitter:description" content="Listen to your favorite tracks with live metadata." />
+    <meta name="twitter:image" content="https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/bf/16/e4/bf16e4db-f50f-e28a-77e8-b8ceea4bf0ba/886443372990.jpg/600x600bb.jpg" />
+
+    <!-- Dynamic Favicon & Icons -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛺</text></svg>">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" /> <!-- Add your 192x192 logo here later -->
+
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+      
+      * {
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('auto.jpg');
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        color: #fff;
+        overflow: hidden;
+      }
+
+      .hero-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -10;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+      }
+
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 30px;
+        z-index: 100;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+
+      .header-left {
+        font-size: 15px;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.9);
+        font-variant-numeric: tabular-nums;
+        text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+      }
+
+      .header-center {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 6px 14px;
+        border-radius: 9999px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        font-size: 14px;
+        font-weight: 500;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      }
+
+      .header-right a {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.12);
+        padding: 8px 16px;
+        border-radius: 9999px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #fff;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      }
+
+      .header-right a:hover {
+        background: rgba(255, 255, 255, 0.25);
+        transform: scale(1.02);
+      }
+
+      .pulse-dot {
+        position: relative;
+        display: flex;
+        width: 10px;
+        height: 10px;
+      }
+
+      .pulse-ping {
+        position: absolute;
+        display: inline-flex;
+        width: 100%;
+        height: 100%;
+        animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+        border-radius: 9999px;
+        background-color: #4ade80;
+        opacity: 0.75;
+      }
+
+      .pulse-solid {
+        position: relative;
+        display: inline-flex;
+        width: 100%;
+        height: 100%;
+        border-radius: 9999px;
+        background-color: #4ade80;
+        box-shadow: 0 0 8px rgba(74, 222, 128, 0.9);
+      }
+
+      @keyframes ping {
+        75%, 100% {
+          transform: scale(2);
+          opacity: 0;
+        }
+      }
+
+      main {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 90px;
+      }
+
+      .main-title {
+        font-size: clamp(2rem, 6vw, 4rem); 
+        font-weight: 800; 
+        color: #fff; 
+        text-shadow: 0 4px 24px rgba(0,0,0,0.7);
+        text-align: center;
+        margin: 0;
+      }
+
+      .player-card {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        border-radius: 24px;
+        padding: 24px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+        width: 100%;
+        max-width: 500px;
+      }
+
+      .track-info-row {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .controls-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 28px;
+      }
+
+      .control-btn {
+        background: transparent;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        padding: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+        opacity: 0.85;
+      }
+
+      .control-btn:hover {
+        opacity: 1;
+        transform: scale(1.1);
+      }
+      
+      .control-btn:active {
+        transform: scale(0.95);
+      }
+
+      .control-btn.play-pause {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        width: 52px;
+        height: 52px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      }
+
+      .progress-container {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+      }
+
+      .progress-bar {
+        width: 100%;
+        height: 6px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 9999px;
+        overflow: hidden;
+        cursor: pointer;
+        position: relative;
+        transition: height 0.2s ease;
+      }
+
+      .progress-bar:hover {
+        height: 8px;
+      }
+
+      .progress-fill {
+        width: 0%;
+        height: 100%;
+        background: #fff;
+        border-radius: 9999px;
+        transition: width 0.1s linear;
+      }
+
+      .time-stamps {
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.7);
+        font-variant-numeric: tabular-nums;
+        font-weight: 500;
+      }
+
+      /* Responsive Adjustments for Mobile */
+      @media (max-width: 600px) {
+        header {
+          padding: 15px 15px;
+        }
+        .header-left {
+          display: none; /* Hide clock on very small screens to save space */
+        }
+        .header-center {
+          font-size: 12px;
+          padding: 6px 12px;
+        }
+        .header-right a {
+          padding: 6px 12px;
+          font-size: 12px;
+        }
+        .player-card {
+          padding: 20px;
+          gap: 14px;
+        }
+        .controls-row {
+          gap: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hero-bg"></div>
+
+    <!-- Off-screen YouTube Player container for audio output -->
+    <div style="position: absolute; left: -9999px; top: -9999px; width: 1px; height: 1px; overflow: hidden; pointer-events: none;">
+      <div id="yt-player"></div>
+    </div>
+
+    <header>
+      <div class="header-left" id="live-time">00:00 AM</div>
+
+      <div class="header-center">
+        <span class="pulse-dot">
+          <span class="pulse-ping"></span>
+          <span class="pulse-solid"></span>
+        </span>
+        <span id="live-counter" style="font-variant-numeric: tabular-nums;">30</span>
+        <span style="color: rgba(255,255,255,0.7);">online</span>
+      </div>
+
+      <div class="header-right">
+        <a href="https://music.youtube.com" target="_blank" rel="noopener noreferrer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M12 0C5.376 0 0 5.376 0 12s5.376 12 12 12 12-5.376 12-12S18.624 0 12 0zm0 19.104c-3.924 0-7.104-3.18-7.104-7.104S8.076 4.896 12 4.896s7.104 3.18 7.104 7.104-3.18 7.104-7.104 7.104zm0-13.332c-3.432 0-6.228 2.796-6.228 6.228S8.568 18.228 12 18.228s6.228-2.796 6.228-6.228S15.432 5.772 12 5.772zM9.684 15.54V8.46L15.816 12l-6.132 3.54z"></path>
+          </svg>
+          <span>YT Music</span>
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <div style="margin-top: 6vh; display: flex; flex-direction: column; align-items: center; padding: 0 20px;">
+        <h1 class="main-title">Auto Rickshaw</h1>
+      </div>
+
+      <div style="margin-bottom: 8vh; display: flex; width: 100%; justify-content: center; padding: 0 20px;">
+        <div style="width: 100%; max-width: 500px;">
+          <div class="player-card">
+            <div class="track-info-row">
+              <div style="position: relative; height: 80px; width: 80px; flex-shrink: 0;">
+                <div style="height: 100%; width: 100%; overflow: hidden; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.15);">
+                  <!-- Pre-loaded iTunes Image directly -->
+                  <img id="track-art" src="https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/bf/16/e4/bf16e4db-f50f-e28a-77e8-b8ceea4bf0ba/886443372990.jpg/600x600bb.jpg" alt="Track artwork" style="height: 100%; width: 100%; object-fit: cover;" />
+                </div>
+              </div>
+              <div style="min-width: 0; flex: 1;">
+                <!-- Pre-loaded Metadata for Track 1 -->
+                <p id="track-title" style="margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 16px; font-weight: 600; color: #fff;">Tera Hone Laga Hoon</p>
+                <p id="track-artist" style="margin: 4px 0 0 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 14px; color: rgba(255,255,255,0.85);">Atif Aslam & Alisha Chinai</p>
+                <p id="track-album" style="margin: 2px 0 0 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 12px; color: rgba(255,255,255,0.5);">Ajab Prem Ki Ghazab Kahani</p>
+              </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-container">
+              <div class="progress-bar" id="progress-bar-wrapper" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-fill" id="progress-fill"></div>
+              </div>
+              <div class="time-stamps">
+                <span id="current-time">00:00</span>
+                <span id="total-duration">04:56</span>
+              </div>
+            </div>
+
+            <!-- Controls Row -->
+            <div class="controls-row">
+              <button class="control-btn" id="prev-btn" aria-label="Previous track">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="19" x2="5" y2="5"></line></svg>
+              </button>
+              <button class="control-btn play-pause" id="play-pause-btn" aria-label="Play or Pause">
+                <svg id="play-icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 2px;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                <svg id="pause-icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+              </button>
+              <button class="control-btn" id="next-btn" aria-label="Next track">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="5" x2="19" y2="19"></line></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- YouTube IFrame API -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+    <script>
+      // Clock & Live counter UI logic
+      function updateClock() {
+        const now = new Date();
+        let hours = now.getHours();
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12 || 12;
+        document.getElementById('live-time').textContent = `${String(hours).padStart(2, '0')}:${minutes} ${ampm}`;
+      }
+      setInterval(updateClock, 1000);
+      updateClock();
+
+      setInterval(() => {
+        const counterEl = document.getElementById('live-counter');
+        let currentCount = parseInt(counterEl.textContent);
+        counterEl.textContent = Math.max(15, currentCount + (Math.floor(Math.random() * 5) - 2));
+      }, 4000);
+
+      // --- 10 Track Playlist (Full Songs) ---
+      const playlistTracks = [
+        { ytId: 'A-CpQtN-5Sw', itunesQuery: 'Tera Hone Laga Hoon Atif Aslam' },
+        { ytId: 'NLlRgNFUa9s', itunesQuery: 'Chammak Challo Akon' },
+        { ytId: 'c504EGCwQlU', itunesQuery: 'Rishte Naate De Dana Dan' },
+        { ytId: 'DKLjQVxUHIw', itunesQuery: 'Dildara Ra.One' },
+        { ytId: 'yDv0WSgXJVg', itunesQuery: 'Senorita Zindagi Na Milegi Dobara' },
+        { ytId: 'hvC10UCl0zs', itunesQuery: 'Subha Hone Na De Desi Boyz' },
+        { ytId: 'JGwWNGJdvx8', itunesQuery: 'Shape of You Ed Sheeran' },
+        { ytId: 'syFZwg808hY', itunesQuery: 'Night Changes One Direction' },
+        { ytId: 'kJQP7kiw5Fk', itunesQuery: 'Despacito Luis Fonsi' },
+        { ytId: 'IJq0yyWug1k', itunesQuery: 'Tum Hi Ho Arijit Singh' }
+      ];
+
+      let currentTrackIndex = 0;
+      let player;
+      let isPlaying = false;
+
+      const playIcon = document.getElementById('play-icon');
+      const pauseIcon = document.getElementById('pause-icon');
+      const progressFill = document.getElementById('progress-fill');
+      const currentTimeEl = document.getElementById('current-time');
+      const totalDurationEl = document.getElementById('total-duration');
+      const progressBarWrapper = document.getElementById('progress-bar-wrapper');
+
+      function formatTime(seconds) {
+        if (isNaN(seconds) || seconds < 0) return '00:00';
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+      }
+
+      // Fetch Album & Artwork directly from iTunes API
+      async function fetchiTunesMetaData(query) {
+        try {
+          const res = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(query)}&entity=song&limit=1`);
+          const data = await res.json();
+          if (data.results && data.results.length > 0) {
+            return data.results[0];
+          }
+        } catch (err) {
+          console.error("iTunes Metadata Fetch error:", err);
+        }
+        return null;
+      }
+
+      // Initialize YouTube API Player
+      function onYouTubeIframeAPIReady() {
+        const track = playlistTracks[currentTrackIndex];
+        
+        player = new YT.Player('yt-player', {
+          videoId: track.ytId,
+          playerVars: {
+            'playsinline': 1,
+            'controls': 0
+          },
+          events: {
+            'onReady': () => loadTrack(currentTrackIndex, false, true),
+            'onStateChange': onPlayerStateChange
+          }
+        });
+      }
+
+      async function loadTrack(index, autoPlay = true, isInitialLoad = false) {
+        currentTrackIndex = index;
+        const track = playlistTracks[currentTrackIndex];
+
+        if (!isInitialLoad) {
+          document.getElementById('track-title').textContent = "Loading track...";
+          document.getElementById('track-artist').textContent = "...";
+          document.getElementById('track-album').textContent = "Searching...";
+        }
+
+        // iTunes API metadata fetch in the background
+        const itunesData = await fetchiTunesMetaData(track.itunesQuery);
+        
+        let title = "Unknown Song";
+        let artist = "Unknown Artist";
+        let album = "Single";
+        
+        // Fallback keeps the preloaded image directly (no youtube img link fallback)
+        let artUrl = document.getElementById('track-art').src;
+
+        if (itunesData) {
+          title = itunesData.trackName;
+          artist = itunesData.artistName;
+          album = itunesData.collectionName || 'Single';
+          if (itunesData.artworkUrl100) {
+            artUrl = itunesData.artworkUrl100.replace('100x100bb', '600x600bb');
+          }
+        }
+
+        document.getElementById('track-title').textContent = title;
+        document.getElementById('track-artist').textContent = artist;
+        document.getElementById('track-album').textContent = album;
+        document.getElementById('track-art').src = artUrl;
+
+        // Configure Media Session API for lockscreen/background play controls
+        if ('mediaSession' in navigator) {
+          navigator.mediaSession.metadata = new MediaMetadata({
+            title: title,
+            artist: artist,
+            album: album,
+            artwork: [{ src: artUrl, sizes: '512x512', type: 'image/jpeg' }]
+          });
+        }
+
+        if (player && player.loadVideoById) {
+          if (autoPlay) {
+            player.loadVideoById(track.ytId);
+            isPlaying = true;
+            playIcon.style.display = 'none';
+            pauseIcon.style.display = 'block';
+          } else {
+            player.cueVideoById(track.ytId);
+          }
+        }
+      }
+
+      function onPlayerStateChange(event) {
+        if (event.data === YT.PlayerState.PLAYING) {
+          isPlaying = true;
+          playIcon.style.display = 'none';
+          pauseIcon.style.display = 'block';
+          if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'playing';
+        } else if (event.data === YT.PlayerState.PAUSED) {
+          isPlaying = false;
+          playIcon.style.display = 'block';
+          pauseIcon.style.display = 'none';
+          if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'paused';
+        } else if (event.data === YT.PlayerState.ENDED) {
+          nextTrack();
+        }
+      }
+
+      // Live Time & Progress Update
+      setInterval(() => {
+        if (player && player.getCurrentTime && isPlaying) {
+          const currentTime = player.getCurrentTime();
+          const duration = player.getDuration();
+          if (duration > 0) {
+            const percent = (currentTime / duration) * 100;
+            progressFill.style.width = `${percent}%`;
+            currentTimeEl.textContent = formatTime(currentTime);
+            totalDurationEl.textContent = formatTime(duration);
+          }
+        }
+      }, 500);
+
+      // Seek Bar Click Event
+      progressBarWrapper.addEventListener('click', (e) => {
+        if (player && player.getDuration) {
+          const rect = progressBarWrapper.getBoundingClientRect();
+          const clickPosition = (e.clientX - rect.left) / rect.width;
+          const seekTime = clickPosition * player.getDuration();
+          player.seekTo(seekTime, true);
+        }
+      });
+
+      function nextTrack() {
+        const nextIndex = (currentTrackIndex + 1) % playlistTracks.length;
+        loadTrack(nextIndex, true, false);
+      }
+
+      function prevTrack() {
+        const prevIndex = (currentTrackIndex - 1 + playlistTracks.length) % playlistTracks.length;
+        loadTrack(prevIndex, true, false);
+      }
+
+      // UI Controls Listeners
+      document.getElementById('play-pause-btn').addEventListener('click', () => {
+        if (!player || !player.getPlayerState) return;
+        const state = player.getPlayerState();
+        if (state === YT.PlayerState.PLAYING) {
+          player.pauseVideo();
+        } else {
+          player.playVideo();
+        }
+      });
+
+      document.getElementById('next-btn').addEventListener('click', nextTrack);
+      document.getElementById('prev-btn').addEventListener('click', prevTrack);
+
+      // Media Session Handlers for Hardware Media Keys & Lockscreen Controls
+      if ('mediaSession' in navigator) {
+        navigator.mediaSession.setActionHandler('play', () => player && player.playVideo());
+        navigator.mediaSession.setActionHandler('pause', () => player && player.pauseVideo());
+        navigator.mediaSession.setActionHandler('previoustrack', prevTrack);
+        navigator.mediaSession.setActionHandler('nexttrack', nextTrack);
+      }
+    </script>
+  </body>
+</html>
