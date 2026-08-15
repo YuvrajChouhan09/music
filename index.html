@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    
+    <!-- SEO Meta Tags -->
+  <title>Og Songs We Used To Listen | Web Music Player</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='80'%3E🎵%3C/text%3E%3C/svg%3E">
+  <meta name="description" content="A seamless web-based music player. Listen to your favorite tracks with background play support and live iTunes metadata." />
+  <meta name="keywords" content="music player, web player, 2010 to 2018 music, old school hits, online music" />
+  <meta name="author" content="Music 2010-2018 Player" />
+  <meta name="theme-color" content="#1a1a1a" />
+
+    <!-- Open Graph -->
+     <meta property="og:type" content="website" />
+<meta property="og:title" content="Og Songs We Used To Listen | Music Player (2010-2018)" />
+<meta property="og:description" content="A seamless web-based music player featuring nostalgic hits from 2010 to 2018 with background play support." />
+<!-- Uses the first track's iTunes artwork as the sharing thumbnail -->
+<meta property="og:image" content="https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/bf/16/e4/bf16e4db-f50f-e28a-77e8-b8ceea4bf0ba/886443372990.jpg/600x600bb.jpg" />
+    <meta property="og:url" content="https://yuvrajchouhan09.github.io/music/" />
+
+    <!-- Twitter Meta Cards -->
+     <meta name="twitter:title" content="Og Songs We Used To Listen | Music Player (2010-2018)" />
+<meta name="twitter:description" content="Listen to your favorite nostalgic hits from 2010 to 2018 with live metadata." />
+<meta name="twitter:image" content="https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/bf/16/e4/bf16e4db-f50f-e28a-77e8-b8ceea4bf0ba/886443372990.jpg/600x600bb.jpg" />
+<!-- Dynamic Favicon & Icons -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='80'%3E🎵%3C/text%3E%3C/svg%3E">
+     <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/YuvrajChouhan09/Yuvraj/refs/heads/main/profile.webp" /> <!-- Add your 192x192 logo here later -->
+  </head>
+  <body>
+    <div class="hero-bg"></div>
+
+    <!-- Off-screen YouTube Player container for audio output -->
+    <div style="position: absolute; left: -9999px; top: -9999px; width: 1px; height: 1px; overflow: hidden; pointer-events: none;">
+      <div id="yt-player"></div>
+    </div>
+
+    <header>
+      <div class="header-left" id="live-time">00:00 AM</div>
+
+      <div class="header-center">
+        <span class="pulse-dot">
+          <span class="pulse-ping"></span>
+          <span class="pulse-solid"></span>
+        </span>
+        <span id="live-counter" style="font-variant-numeric: tabular-nums;">30</span>
+        <span style="color: rgba(255,255,255,0.7);">online</span>
+      </div>
+
+     <div class="header-right">
+  <a href="https://open.spotify.com" target="_blank" rel="noopener noreferrer">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm5.521 17.34c-.24.359-.72.48-1.079.24-2.961-1.8-6.6-2.221-10.92-1.219-.419.099-.839-.18-.96-.599-.099-.42.18-.84.599-.96 4.74-1.08 8.82-.6 12.18 1.44.36.24.48.72.24 1.078zm1.44-3.84c-.301.48-.96.601-1.44.3-3.36-2.04-8.4-2.64-12.36-1.44-.54.18-1.14-.12-1.32-.66-.18-.54.12-1.14.66-1.32 4.44-1.32 10.02-.66 13.98 1.8.48.3.66.96.48 1.44zm.12-4.08C15.12 7.2 8.88 7 5.16 8.16c-.66.18-1.38-.18-1.56-.84-.18-.66.18-1.38.84-1.56 4.2-1.26 11.16-1.02 15.36 1.44.6.36.78 1.14.42 1.74-.36.6-1.14.78-1.74.42z"/>
+    </svg>
+    <span>Spotify</span>
+  </a>
+</div>
+    </header>
+
+    <main>
+      <div style="margin-top: 6vh; display: flex; flex-direction: column; align-items: center; padding: 0 20px;">
+        <h1 class="main-title">Bluetooth Era Songs</h1>
+      </div>
+
+      <div style="margin-bottom: 8vh; display: flex; width: 100%; justify-content: center; padding: 0 20px;">
+        <div style="width: 100%; max-width: 500px;">
+          <div class="player-card">
+            <div class="track-info-row">
+              <div style="position: relative; height: 80px; width: 80px; flex-shrink: 0;">
+                <div style="height: 100%; width: 100%; overflow: hidden; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.15);">
+                  <!-- Pre-loaded iTunes Image directly -->
+                  <img id="track-art" src="https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/bf/16/e4/bf16e4db-f50f-e28a-77e8-b8ceea4bf0ba/886443372990.jpg/600x600bb.jpg" alt="Track artwork" style="height: 100%; width: 100%; object-fit: cover;" />
+                </div>
+              </div>
+              <div style="min-width: 0; flex: 1;">
+                <!-- Pre-loaded Metadata for Track 1 -->
+                <p id="track-title" style="margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 16px; font-weight: 600; color: #fff;">Tera Hone Laga Hoon</p>
+                <p id="track-artist" style="margin: 4px 0 0 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 14px; color: rgba(255,255,255,0.85);">Atif Aslam & Alisha Chinai</p>
+                <p id="track-album" style="margin: 2px 0 0 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 12px; color: rgba(255,255,255,0.5);">Ajab Prem Ki Ghazab Kahani</p>
+              </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-container">
+              <div class="progress-bar" id="progress-bar-wrapper" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-fill" id="progress-fill"></div>
+              </div>
+              <div class="time-stamps">
+                <span id="current-time">00:00</span>
+                <span id="total-duration">04:56</span>
+              </div>
+            </div>
+
+            <!-- Controls Row -->
+            <div class="controls-row">
+              <button class="control-btn" id="prev-btn" aria-label="Previous track">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="19" x2="5" y2="5"></line></svg>
+              </button>
+              <button class="control-btn play-pause" id="play-pause-btn" aria-label="Play or Pause">
+                <svg id="play-icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 2px;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                <svg id="pause-icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+              </button>
+              <button class="control-btn" id="next-btn" aria-label="Next track">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="5" x2="19" y2="19"></line></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- YouTube IFrame API -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
