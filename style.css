@@ -15,7 +15,6 @@ html, body {
   min-height: 100dvh;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   color: #fff;
-  background-color: #121212; /* Fallback */
 }
 
 /* Restored your hero-bg properly */
