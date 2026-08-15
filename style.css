@@ -122,78 +122,111 @@ header {
   }
 }
 
-/* MAIN CONTAINER: Anchors player low at the bottom center on all screens */
+/* MAIN CONTAINER: Title stays strictly at the top, card strictly at the bottom */
 main {
   display: flex;
   flex-direction: column;
   height: 100vh;
   height: 100dvh;
-  justify-content: flex-end;
+  justify-content: space-between; 
   align-items: center;
-  padding: 80px 16px 20px 16px;
+  padding: 100px 16px 30px 16px; /* 100px pushes title just below the header */
 }
 
+/* MAIN TITLE: Big size, removed auto margin so it stays up high */
 .main-title {
-  font-size: clamp(1.2rem, 4vw, 2.8rem);
+  font-size: clamp(2.2rem, 5vw, 3.5rem); 
   font-weight: 800;
   color: #fff;
   text-shadow: 0 4px 24px rgba(0, 0, 0, 0.7);
   text-align: center;
-  margin-top: auto;
-  margin-bottom: 24px;
+  margin: 0; 
 }
 
-/* PLAYER CARD: Fixed sizing behavior & screen clipping protection */
+/* PLAYER CARD: Wider for tablets (560px), safely bounded inside mobile */
 .player-card {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
   border-radius: 20px;
-  padding: 16px 20px;
+  padding: 20px;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
   
-  /* Guarantees the card stays exact same size & inside screen bounds */
-  width: min(440px, calc(100vw - 32px));
+  width: min(560px, calc(100vw - 32px)); /* 560px for Tablet/Desktop, fits mobile perfectly */
   box-sizing: border-box;
-  overflow: hidden; 
+  overflow: hidden;
   margin-bottom: 0;
 }
 
-/* TRACK INFO: Allows inner text to truncate without stretching container */
+/* TRACK INFO: Flexible truncation */
 .track-info-row {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
   width: 100%;
-  min-width: 0; /* CRITICAL: Prevents flex children from expanding parent */
+  min-width: 0;
+}
+
+.album-art-wrapper {
+  position: relative;
+  height: 72px;
+  width: 72px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+.album-art-wrapper img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
 
 .track-details {
-  min-width: 0; /* CRITICAL: Enables ellipsis truncation */
+  min-width: 0;
   flex: 1;
   overflow: hidden;
 }
 
-.track-details h3,
-.track-details p,
-.track-details span,
-.track-details div {
+.track-details h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0 0 4px 0;
+}
+
+.track-details p {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   margin: 0;
-  max-width: 100%;
+}
+
+#track-artist {
+  font-size: 15px;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 2px;
+}
+
+#track-album {
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
 }
 
 .controls-row {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 24px;
+  gap: 28px;
 }
 
 .control-btn {
@@ -222,15 +255,15 @@ main {
 .control-btn.play-pause {
   background: rgba(255, 255, 255, 0.2);
   border-radius: 50%;
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .progress-container {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
   width: 100%;
 }
 
@@ -260,16 +293,16 @@ main {
 .time-stamps {
   display: flex;
   justify-content: space-between;
-  font-size: 12px;
+  font-size: 13px;
   color: rgba(255, 255, 255, 0.7);
   font-variant-numeric: tabular-nums;
   font-weight: 500;
 }
 
-/* RESPONSIVE STYLES (Supports down to 365px screens) */
+/* RESPONSIVE STYLES (Mobile adjustments) */
 @media (max-width: 600px) {
   header {
-    padding: 10px 12px;
+    padding: 12px 15px;
   }
 
   .header-left {
@@ -278,47 +311,57 @@ main {
 
   .header-center {
     font-size: 11px;
-    padding: 4px 8px;
-    gap: 6px;
+    padding: 4px 10px;
   }
 
   .header-right a {
-    padding: 6px 10px;
+    padding: 6px 12px;
     font-size: 11px;
   }
 
   main {
-    padding: 65px 12px 12px 12px;
+    padding: 90px 12px 20px 12px; /* Keeps the top padding so title is high */
   }
 
   .main-title {
-    font-size: clamp(1rem, 4.5vw, 1.8rem);
-    margin-bottom: 12px;
+    font-size: 2rem; /* FORCED BIG SIZE on mobile */
   }
 
   .player-card {
-    width: calc(100vw - 24px);
-    padding: 12px 14px;
-    gap: 10px;
-    border-radius: 16px;
+    width: calc(100vw - 24px); /* Full width within mobile bounds */
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .album-art-wrapper {
+    height: 60px;
+    width: 60px;
+  }
+  
+  .track-details h3 {
+    font-size: 16px;
+  }
+
+  .track-details p {
+    font-size: 13px;
   }
 
   .controls-row {
-    gap: 16px;
+    gap: 20px;
   }
 
   .control-btn.play-pause {
-    width: 40px;
-    height: 40px;
+    width: 46px;
+    height: 46px;
   }
 }
 
-/* SHORT MOBILE SCREENS */
-@media (max-height: 600px) {
+/* SHORT MOBILE SCREENS (Removes title only if the phone is held horizontally / exceptionally short) */
+@media (max-height: 500px) {
   .main-title {
     display: none;
   }
   main {
-    padding-top: 50px;
+    padding-top: 60px;
   }
 }
