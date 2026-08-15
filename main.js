@@ -204,4 +204,9 @@
         navigator.mediaSession.setActionHandler('pause', () => player && player.pauseVideo());
         navigator.mediaSession.setActionHandler('previoustrack', prevTrack);
         navigator.mediaSession.setActionHandler('nexttrack', nextTrack);
+<<<<<<< HEAD
       }
+   
+=======
+      }
+>>>>>>> upstream/main
