@@ -134,8 +134,8 @@ main {
 }
 
 .main-title {
-  margin-top: 14vh; /* Keeps it a little bit up side safely below header */
-  margin-bottom: auto; /* This automatically pushes the player card down */
+  margin-top: 14vh;
+  margin-bottom: auto; 
   font-size: clamp(2rem, 5vw, 3.5rem); 
   font-weight: 800;
   text-shadow: 0 4px 24px rgba(0, 0, 0, 0.7);
@@ -144,9 +144,8 @@ main {
 
 .player-card {
   width: 100%;
-  max-width: 560px; /* Tablet size increase */
-  margin-bottom: 8vh; /* Keeps it perfectly at bottom safely */
-  
+  max-width: 560px; 
+  margin-bottom: 8vh; 
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -268,11 +267,14 @@ main {
   overflow: hidden;
   cursor: pointer;
   position: relative;
-  transition: height 0.2s ease;
+  /* Added margin transition to fix layout shift on hover */
+  transition: height 0.2s ease, margin 0.2s ease;
+  margin: 1px 0; 
 }
 
 .progress-bar:hover {
   height: 8px;
+  margin: 0; /* Absorbs the 2px height growth, stopping the UI from jumping */
 }
 
 .progress-fill {
@@ -303,7 +305,7 @@ main {
   }
 
   .main-title {
-    font-size: 2rem; /* FORCED BIG SIZE on mobile */
+    font-size: 2rem; 
     margin-top: 12vh;
   }
 
