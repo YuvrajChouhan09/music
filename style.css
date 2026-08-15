@@ -122,6 +122,7 @@ header {
   }
 }
 
+/* MAIN CONTAINER: Anchors player low at the bottom center on all screens */
 main {
   display: flex;
   flex-direction: column;
@@ -129,19 +130,20 @@ main {
   height: 100dvh;
   justify-content: flex-end;
   align-items: center;
-  padding: 80px 16px 16px 16px;
+  padding: 80px 16px 20px 16px;
 }
 
 .main-title {
-  font-size: clamp(1.2rem, 4vw, 3rem);
+  font-size: clamp(1.2rem, 4vw, 2.8rem);
   font-weight: 800;
   color: #fff;
   text-shadow: 0 4px 24px rgba(0, 0, 0, 0.7);
   text-align: center;
   margin-top: auto;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
+/* PLAYER CARD: Fixed sizing behavior & screen clipping protection */
 .player-card {
   display: flex;
   flex-direction: column;
@@ -153,29 +155,38 @@ main {
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
-  width: 100%;
-  max-width: 440px;
+  
+  /* Guarantees the card stays exact same size & inside screen bounds */
+  width: min(440px, calc(100vw - 32px));
+  box-sizing: border-box;
+  overflow: hidden; 
   margin-bottom: 0;
 }
 
+/* TRACK INFO: Allows inner text to truncate without stretching container */
 .track-info-row {
   display: flex;
   align-items: center;
   gap: 12px;
-  min-width: 0;
+  width: 100%;
+  min-width: 0; /* CRITICAL: Prevents flex children from expanding parent */
 }
 
 .track-details {
-  min-width: 0;
+  min-width: 0; /* CRITICAL: Enables ellipsis truncation */
   flex: 1;
+  overflow: hidden;
 }
 
 .track-details h3,
-.track-details p {
+.track-details p,
+.track-details span,
+.track-details div {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   margin: 0;
+  max-width: 100%;
 }
 
 .controls-row {
@@ -255,7 +266,7 @@ main {
   font-weight: 500;
 }
 
-/* Responsive Adjustments for Mobile (up to 600px, targeted for 365px minimum) */
+/* RESPONSIVE STYLES (Supports down to 365px screens) */
 @media (max-width: 600px) {
   header {
     padding: 10px 12px;
@@ -277,7 +288,7 @@ main {
   }
 
   main {
-    padding: 65px 10px 10px 10px;
+    padding: 65px 12px 12px 12px;
   }
 
   .main-title {
@@ -286,47 +297,23 @@ main {
   }
 
   .player-card {
+    width: calc(100vw - 24px);
     padding: 12px 14px;
-    gap: 8px;
+    gap: 10px;
     border-radius: 16px;
   }
 
-  .track-info-row img,
-  .track-info-row .album-art {
-    width: 40px;
-    height: 40px;
-    border-radius: 8px;
-  }
-
-  .track-details h3 {
-    font-size: 14px;
-  }
-
-  .track-details p {
-    font-size: 12px;
-  }
-
   .controls-row {
-    gap: 14px;
-  }
-
-  .control-btn svg {
-    width: 18px;
-    height: 18px;
+    gap: 16px;
   }
 
   .control-btn.play-pause {
     width: 40px;
     height: 40px;
   }
-
-  .control-btn.play-pause svg {
-    width: 20px;
-    height: 20px;
-  }
 }
 
-/* Fallback for low-height mobile viewports */
+/* SHORT MOBILE SCREENS */
 @media (max-height: 600px) {
   .main-title {
     display: none;
