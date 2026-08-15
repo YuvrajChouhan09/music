@@ -6,7 +6,6 @@
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
 }
-
 html, body {
   margin: 0;
   padding: 0;
@@ -15,7 +14,9 @@ html, body {
   min-height: 100dvh;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   color: #fff;
+  /* Remove background-color here so it doesn't cover your hero-bg */
 }
+
 
 /* Restored your hero-bg properly */
 .hero-bg {
