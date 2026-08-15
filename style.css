@@ -122,28 +122,29 @@ header {
   }
 }
 
-/* MAIN CONTAINER: Anchors player low at the bottom center on all screens */
+/* MAIN CONTAINER: Pushes title to top and card to bottom */
 main {
   display: flex;
   flex-direction: column;
   height: 100vh;
   height: 100dvh;
-  justify-content: flex-end;
+  justify-content: space-between; /* Keeps Title at Top & Card at Bottom */
   align-items: center;
-  padding: 80px 16px 20px 16px;
+  padding: 90px 16px 20px 16px;
 }
 
+/* MAIN TITLE: Restored big sizing and top positioning */
 .main-title {
-  font-size: clamp(1.2rem, 4vw, 2.8rem);
+  font-size: clamp(1.8rem, 5vw, 3.5rem); 
   font-weight: 800;
   color: #fff;
   text-shadow: 0 4px 24px rgba(0, 0, 0, 0.7);
   text-align: center;
   margin-top: auto;
-  margin-bottom: 24px;
+  margin-bottom: auto;
 }
 
-/* PLAYER CARD: Fixed sizing behavior & screen clipping protection */
+/* PLAYER CARD: Fitted to screen & text truncation preserved */
 .player-card {
   display: flex;
   flex-direction: column;
@@ -156,24 +157,24 @@ main {
   border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
   
-  /* Guarantees the card stays exact same size & inside screen bounds */
+  /* Fits 365px screens and preserves card dimensions */
   width: min(440px, calc(100vw - 32px));
   box-sizing: border-box;
-  overflow: hidden; 
+  overflow: hidden;
   margin-bottom: 0;
 }
 
-/* TRACK INFO: Allows inner text to truncate without stretching container */
+/* TRACK INFO: Prevents text from pushing card off-screen */
 .track-info-row {
   display: flex;
   align-items: center;
   gap: 12px;
   width: 100%;
-  min-width: 0; /* CRITICAL: Prevents flex children from expanding parent */
+  min-width: 0;
 }
 
 .track-details {
-  min-width: 0; /* CRITICAL: Enables ellipsis truncation */
+  min-width: 0;
   flex: 1;
   overflow: hidden;
 }
@@ -269,7 +270,7 @@ main {
 /* RESPONSIVE STYLES (Supports down to 365px screens) */
 @media (max-width: 600px) {
   header {
-    padding: 10px 12px;
+    padding: 12px 15px;
   }
 
   .header-left {
@@ -278,47 +279,35 @@ main {
 
   .header-center {
     font-size: 11px;
-    padding: 4px 8px;
-    gap: 6px;
+    padding: 4px 10px;
   }
 
   .header-right a {
-    padding: 6px 10px;
+    padding: 6px 12px;
     font-size: 11px;
   }
 
   main {
-    padding: 65px 12px 12px 12px;
+    padding: 75px 12px 15px 12px;
   }
 
   .main-title {
-    font-size: clamp(1rem, 4.5vw, 1.8rem);
-    margin-bottom: 12px;
+    font-size: clamp(1.8rem, 5vw, 3.5rem); /* Keeps title big on mobile */
   }
 
   .player-card {
     width: calc(100vw - 24px);
-    padding: 12px 14px;
+    padding: 14px 16px;
     gap: 10px;
     border-radius: 16px;
   }
 
   .controls-row {
-    gap: 16px;
+    gap: 18px;
   }
 
   .control-btn.play-pause {
-    width: 40px;
-    height: 40px;
-  }
-}
-
-/* SHORT MOBILE SCREENS */
-@media (max-height: 600px) {
-  .main-title {
-    display: none;
-  }
-  main {
-    padding-top: 50px;
+    width: 44px;
+    height: 44px;
   }
 }
