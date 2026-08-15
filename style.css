@@ -127,41 +127,55 @@ main {
   flex-direction: column;
   height: 100vh;
   height: 100dvh;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
-  padding: 90px 20px 30px 20px;
+  padding: 80px 16px 16px 16px;
 }
 
 .main-title {
-  font-size: clamp(1.8rem, 5vw, 3.5rem);
+  font-size: clamp(1.2rem, 4vw, 3rem);
   font-weight: 800;
   color: #fff;
   text-shadow: 0 4px 24px rgba(0, 0, 0, 0.7);
   text-align: center;
   margin-top: auto;
-  margin-bottom: auto;
+  margin-bottom: 20px;
 }
 
 .player-card {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  border-radius: 24px;
-  padding: 20px;
+  gap: 12px;
+  border-radius: 20px;
+  padding: 16px 20px;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
   width: 100%;
-  max-width: 480px;
-  margin-bottom: 10px;
+  max-width: 440px;
+  margin-bottom: 0;
 }
 
 .track-info-row {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
+  min-width: 0;
+}
+
+.track-details {
+  min-width: 0;
+  flex: 1;
+}
+
+.track-details h3,
+.track-details p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
 }
 
 .controls-row {
@@ -241,10 +255,10 @@ main {
   font-weight: 500;
 }
 
-/* Responsive Adjustments for Mobile */
+/* Responsive Adjustments for Mobile (up to 600px, targeted for 365px minimum) */
 @media (max-width: 600px) {
   header {
-    padding: 12px 15px;
+    padding: 10px 12px;
   }
 
   .header-left {
@@ -253,31 +267,71 @@ main {
 
   .header-center {
     font-size: 11px;
-    padding: 4px 10px;
+    padding: 4px 8px;
+    gap: 6px;
   }
 
   .header-right a {
-    padding: 6px 12px;
+    padding: 6px 10px;
     font-size: 11px;
   }
 
   main {
-    padding: 75px 12px 15px 12px;
+    padding: 65px 10px 10px 10px;
+  }
+
+  .main-title {
+    font-size: clamp(1rem, 4.5vw, 1.8rem);
+    margin-bottom: 12px;
   }
 
   .player-card {
-    padding: 16px;
-    gap: 12px;
-    max-width: 100%;
-    margin-bottom: 0;
+    padding: 12px 14px;
+    gap: 8px;
+    border-radius: 16px;
+  }
+
+  .track-info-row img,
+  .track-info-row .album-art {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+  }
+
+  .track-details h3 {
+    font-size: 14px;
+  }
+
+  .track-details p {
+    font-size: 12px;
   }
 
   .controls-row {
-    gap: 18px;
+    gap: 14px;
+  }
+
+  .control-btn svg {
+    width: 18px;
+    height: 18px;
   }
 
   .control-btn.play-pause {
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .control-btn.play-pause svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Fallback for low-height mobile viewports */
+@media (max-height: 600px) {
+  .main-title {
+    display: none;
+  }
+  main {
+    padding-top: 50px;
   }
 }
