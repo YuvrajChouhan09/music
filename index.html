@@ -6,7 +6,9 @@
     
     <!-- SEO Meta Tags -->
     <title>Og Songs We Used To Listen | Web Music Player</title>
+    <!-- This links your HTML to your CSS file -->
     <link rel="stylesheet" href="style.css" />
+    
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='80'%3E🎵%3C/text%3E%3C/svg%3E" />
     <meta name="description" content="A seamless web-based music player. Listen to your favorite tracks with background play support and live iTunes metadata." />
     <meta name="keywords" content="music player, web player, 2010 to 2018 music, old school hits, online music" />
@@ -43,7 +45,7 @@
           <span class="pulse-solid"></span>
         </span>
         <span id="live-counter" style="font-variant-numeric: tabular-nums;">30</span>
-        <span style="color: rgba(255,255,255,0.7);">online</span>
+        <span style="color: rgba(255,255,255,0.7); margin-left: 4px;">online</span>
       </div>
 
       <div class="header-right">
@@ -73,7 +75,8 @@
 
         <!-- Progress Bar -->
         <div class="progress-container">
-          <div class="progress-bar" id="progress-bar-wrapper" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+          <!-- Added aria-valuenow="0" for proper accessibility completion -->
+          <div class="progress-bar" id="progress-bar-wrapper" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
             <div class="progress-fill" id="progress-fill"></div>
           </div>
           <div class="time-stamps">
