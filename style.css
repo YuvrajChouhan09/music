@@ -14,13 +14,22 @@ html, body {
   min-height: 100vh;
   min-height: 100dvh;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  color: #fff;
+  background-color: #121212; /* Fallback */
+}
+
+/* Restored your hero-bg properly */
+.hero-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('https://res.cloudinary.com/dyf5x6iqz/image/upload/copy_of_artwork_stmlky.webp');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  background-attachment: fixed;
-  color: #fff;
-  overflow: hidden;
 }
 
 header {
@@ -34,8 +43,6 @@ header {
   padding: 20px 30px;
   z-index: 100;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
 }
 
 .header-left {
@@ -58,7 +65,6 @@ header {
   -webkit-backdrop-filter: blur(12px);
   font-size: 14px;
   font-weight: 500;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .header-right a {
@@ -76,15 +82,11 @@ header {
   transition: all 0.2s ease;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
-.header-right a:hover,
-.header-right a:focus-visible {
+.header-right a:hover {
   background: rgba(255, 255, 255, 0.25);
   transform: scale(1.02);
-  outline: 2px solid rgba(255, 255, 255, 0.5);
-  outline-offset: 2px;
 }
 
 .pulse-dot {
@@ -112,7 +114,6 @@ header {
   height: 100%;
   border-radius: 9999px;
   background-color: #4ade80;
-  box-shadow: 0 0 8px rgba(74, 222, 128, 0.9);
 }
 
 @keyframes ping {
@@ -122,29 +123,30 @@ header {
   }
 }
 
-/* MAIN CONTAINER: Title stays strictly at the top, card strictly at the bottom */
+/* ---- MAIN LAYOUT FIX ---- */
 main {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  height: 100dvh;
-  justify-content: space-between; 
   align-items: center;
-  padding: 100px 16px 30px 16px; /* 100px pushes title just below the header */
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 0 20px;
 }
 
-/* MAIN TITLE: Big size, removed auto margin so it stays up high */
 .main-title {
-  font-size: clamp(2.2rem, 5vw, 3.5rem); 
+  margin-top: 14vh; /* Keeps it a little bit up side safely below header */
+  margin-bottom: auto; /* This automatically pushes the player card down */
+  font-size: clamp(2rem, 5vw, 3.5rem); 
   font-weight: 800;
-  color: #fff;
   text-shadow: 0 4px 24px rgba(0, 0, 0, 0.7);
   text-align: center;
-  margin: 0; 
 }
 
-/* PLAYER CARD: Wider for tablets (560px), safely bounded inside mobile */
 .player-card {
+  width: 100%;
+  max-width: 560px; /* Tablet size increase */
+  margin-bottom: 8vh; /* Keeps it perfectly at bottom safely */
+  
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -155,20 +157,13 @@ main {
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
-  
-  width: min(560px, calc(100vw - 32px)); /* 560px for Tablet/Desktop, fits mobile perfectly */
-  box-sizing: border-box;
-  overflow: hidden;
-  margin-bottom: 0;
 }
 
-/* TRACK INFO: Flexible truncation */
 .track-info-row {
   display: flex;
   align-items: center;
   gap: 16px;
   width: 100%;
-  min-width: 0;
 }
 
 .album-art-wrapper {
@@ -197,7 +192,6 @@ main {
 .track-details h3 {
   font-size: 18px;
   font-weight: 600;
-  color: #fff;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -242,8 +236,7 @@ main {
   opacity: 0.85;
 }
 
-.control-btn:hover,
-.control-btn:focus-visible {
+.control-btn:hover {
   opacity: 1;
   transform: scale(1.1);
 }
@@ -309,26 +302,12 @@ main {
     display: none;
   }
 
-  .header-center {
-    font-size: 11px;
-    padding: 4px 10px;
-  }
-
-  .header-right a {
-    padding: 6px 12px;
-    font-size: 11px;
-  }
-
-  main {
-    padding: 90px 12px 20px 12px; /* Keeps the top padding so title is high */
-  }
-
   .main-title {
     font-size: 2rem; /* FORCED BIG SIZE on mobile */
+    margin-top: 12vh;
   }
 
   .player-card {
-    width: calc(100vw - 24px); /* Full width within mobile bounds */
     padding: 16px;
     gap: 12px;
   }
@@ -356,12 +335,15 @@ main {
   }
 }
 
-/* SHORT MOBILE SCREENS (Removes title only if the phone is held horizontally / exceptionally short) */
-@media (max-height: 500px) {
+/* SHORT MOBILE SCREENS */
+@media (max-height: 550px) {
   .main-title {
     display: none;
   }
   main {
-    padding-top: 60px;
+    justify-content: center;
+  }
+  .player-card {
+    margin-bottom: 2vh;
   }
 }
