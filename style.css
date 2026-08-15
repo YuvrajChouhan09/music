@@ -11,7 +11,8 @@ html, body {
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  min-height: 100dvh;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('https://res.cloudinary.com/dyf5x6iqz/image/upload/copy_of_artwork_stmlky.webp');
   background-size: cover;
@@ -20,19 +21,6 @@ html, body {
   background-attachment: fixed;
   color: #fff;
   overflow: hidden;
-}
-
-.hero-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -10;
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
 }
 
 header {
@@ -55,7 +43,7 @@ header {
   font-weight: 500;
   color: rgba(255, 255, 255, 0.9);
   font-variant-numeric: tabular-nums;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
 }
 
 .header-center {
@@ -70,7 +58,7 @@ header {
   -webkit-backdrop-filter: blur(12px);
   font-size: 14px;
   font-weight: 500;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .header-right a {
@@ -88,12 +76,15 @@ header {
   transition: all 0.2s ease;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
-.header-right a:hover {
+.header-right a:hover,
+.header-right a:focus-visible {
   background: rgba(255, 255, 255, 0.25);
   transform: scale(1.02);
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
 }
 
 .pulse-dot {
@@ -135,18 +126,19 @@ main {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  height: 100dvh;
   justify-content: space-between;
   align-items: center;
-  padding: 90px 20px 30px 20px; /* Added bottom padding to anchor elements lower */
+  padding: 90px 20px 30px 20px;
 }
 
 .main-title {
-  font-size: clamp(1.8rem, 5vw, 3.5rem); 
-  font-weight: 800; 
-  color: #fff; 
-  text-shadow: 0 4px 24px rgba(0,0,0,0.7);
+  font-size: clamp(1.8rem, 5vw, 3.5rem);
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.7);
   text-align: center;
-  margin-top: auto; /* Pushes the title down gracefully */
+  margin-top: auto;
   margin-bottom: auto;
 }
 
@@ -160,10 +152,10 @@ main {
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
   width: 100%;
   max-width: 480px;
-  margin-bottom: 10px; /* Lowers the card closer to the bottom edge */
+  margin-bottom: 10px;
 }
 
 .track-info-row {
@@ -192,7 +184,8 @@ main {
   opacity: 0.85;
 }
 
-.control-btn:hover {
+.control-btn:hover,
+.control-btn:focus-visible {
   opacity: 1;
   transform: scale(1.1);
 }
@@ -206,7 +199,7 @@ main {
   border-radius: 50%;
   width: 48px;
   height: 48px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .progress-container {
@@ -253,29 +246,36 @@ main {
   header {
     padding: 12px 15px;
   }
+
   .header-left {
-    display: none; 
+    display: none;
   }
+
   .header-center {
     font-size: 11px;
     padding: 4px 10px;
   }
+
   .header-right a {
     padding: 6px 12px;
     font-size: 11px;
   }
+
   main {
-    padding: 75px 12px 15px 12px; /* Tighter padding for small screens */
+    padding: 75px 12px 15px 12px;
   }
+
   .player-card {
     padding: 16px;
     gap: 12px;
     max-width: 100%;
-    margin-bottom: 0px;
+    margin-bottom: 0;
   }
+
   .controls-row {
     gap: 18px;
   }
+
   .control-btn.play-pause {
     width: 44px;
     height: 44px;
