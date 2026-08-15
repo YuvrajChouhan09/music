@@ -17,23 +17,17 @@ setInterval(() => {
 
 // --- 10 Track Playlist (Full Songs) ---
 const playlistTracks = [
-  { ytId: 'Y9IWXcd9p20', itunesQuery: 'Banjaara Ek Villain' },
-  { ytId: 'XvXoYVghqwI', itunesQuery: 'Be Intehaan Race 2' },
-  { ytId: '2tKtKvhq22w', itunesQuery: 'Badtameez Dil Yeh Jawaani Hai Deewani' },
-  { ytId: 'pSg1r5Q3Hps', itunesQuery: 'Sunny Sunny Yaariyan' },
-  { ytId: 'wTpy5d-B3u8', itunesQuery: 'Kabira Encore Yeh Jawaani Hai Deewani' },
-  { ytId: 'V9qLz6lS9-0', itunesQuery: 'Raabta Agent Vinod' },
-  { ytId: 't4mB-v5i0wI', itunesQuery: 'Main Rang Sharbaton Ka Phata Poster Nikhla Hero' },
-  { ytId: 'sK7i8i1hUvg', itunesQuery: 'Sun Saathiya ABCD 2' },
-  { ytId: 'n_X0sZ5d0gA', itunesQuery: 'Sooraj Dooba Hain Roy' },
-  { ytId: '12gHnCPAVnE', itunesQuery: 'Channa Mereya Ae Dil Hai Mushkil' },
-  { ytId: '2Vv-BfVoq4g', itunesQuery: 'Zaalima Raees' },
-  { ytId: 'L_j7zVz7d0o', itunesQuery: 'Hawayein Jab Harry Met Sejal' },
-  { ytId: 'X-53Vz5d0gA', itunesQuery: 'Agar Tum Saath Ho Tamasha' },
-  { ytId: 'zQ9kZ7d0gA', itunesQuery: 'Samjhawan Humpty Sharma Ki Dulhania' },
-  { ytId: 'M3n_X0sZ5gA', itunesQuery: 'Phir Le Aya Dil Barfi' }
+  { ytId: 'A-CpQtN-5Sw', itunesQuery: 'Tera Hone Laga Hoon Atif Aslam' },
+  { ytId: 'NLlRgNFUa9s', itunesQuery: 'Chammak Challo Akon' },
+  { ytId: 'c504EGCwQlU', itunesQuery: 'Rishte Naate De Dana Dan' },
+  { ytId: 'DKLjQVxUHIw', itunesQuery: 'Dildara Ra.One' },
+  { ytId: 'yDv0WSgXJVg', itunesQuery: 'Senorita Zindagi Na Milegi Dobara' },
+  { ytId: 'hvC10UCl0zs', itunesQuery: 'Subha Hone Na De Desi Boyz' },
+  { ytId: 'JGwWNGJdvx8', itunesQuery: 'Shape of You Ed Sheeran' },
+  { ytId: 'syFZwg808hY', itunesQuery: 'Night Changes One Direction' },
+  { ytId: 'kJQP7kiw5Fk', itunesQuery: 'Despacito Luis Fonsi' },
+  { ytId: 'IJq0yyWug1k', itunesQuery: 'Tum Hi Ho Arijit Singh' }
 ];
-
 
 let currentTrackIndex = 0;
 let player;
