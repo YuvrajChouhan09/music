@@ -1,271 +1,283 @@
-   :root {
-        color-scheme: dark;
-      }
-      
-      * {
-        box-sizing: border-box;
-        -webkit-tap-highlight-color: transparent;
-      }
+:root {
+  color-scheme: dark;
+}
 
-      html, body {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('https://res.cloudinary.com/dyf5x6iqz/image/upload/copy_of_artwork_stmlky.webp');
-        background-size: cover;
-        background-position: center center;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        color: #fff;
-        overflow: hidden;
-      }
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
 
-      .hero-bg {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        z-index: -10;
-        background-size: cover;
-        background-position: center center;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-      }
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('https://res.cloudinary.com/dyf5x6iqz/image/upload/copy_of_artwork_stmlky.webp');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: #fff;
+  overflow: hidden;
+}
 
-      header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 20px 30px;
-        z-index: 100;
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-      }
+.hero-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -10;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
 
-      .header-left {
-        font-size: 15px;
-        font-weight: 500;
-        color: rgba(255, 255, 255, 0.9);
-        font-variant-numeric: tabular-nums;
-        text-shadow: 0 1px 4px rgba(0,0,0,0.6);
-      }
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  z-index: 100;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
 
-      .header-center {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        background: rgba(255, 255, 255, 0.1);
-        padding: 6px 14px;
-        border-radius: 9999px;
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        font-size: 14px;
-        font-weight: 500;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-      }
+.header-left {
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+}
 
-      .header-right a {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        background: rgba(255, 255, 255, 0.12);
-        padding: 8px 16px;
-        border-radius: 9999px;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        color: #fff;
-        text-decoration: none;
-        font-size: 14px;
-        font-weight: 500;
-        transition: all 0.2s ease;
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-      }
+.header-center {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 6px 14px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
 
-      .header-right a:hover {
-        background: rgba(255, 255, 255, 0.25);
-        transform: scale(1.02);
-      }
+.header-right a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.12);
+  padding: 8px 16px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
 
-      .pulse-dot {
-        position: relative;
-        display: flex;
-        width: 10px;
-        height: 10px;
-      }
+.header-right a:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.02);
+}
 
-      .pulse-ping {
-        position: absolute;
-        display: inline-flex;
-        width: 100%;
-        height: 100%;
-        animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
-        border-radius: 9999px;
-        background-color: #4ade80;
-        opacity: 0.75;
-      }
+.pulse-dot {
+  position: relative;
+  display: flex;
+  width: 10px;
+  height: 10px;
+}
 
-      .pulse-solid {
-        position: relative;
-        display: inline-flex;
-        width: 100%;
-        height: 100%;
-        border-radius: 9999px;
-        background-color: #4ade80;
-        box-shadow: 0 0 8px rgba(74, 222, 128, 0.9);
-      }
+.pulse-ping {
+  position: absolute;
+  display: inline-flex;
+  width: 100%;
+  height: 100%;
+  animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+  border-radius: 9999px;
+  background-color: #4ade80;
+  opacity: 0.75;
+}
 
-      @keyframes ping {
-        75%, 100% {
-          transform: scale(2);
-          opacity: 0;
-        }
-      }
+.pulse-solid {
+  position: relative;
+  display: inline-flex;
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+  background-color: #4ade80;
+  box-shadow: 0 0 8px rgba(74, 222, 128, 0.9);
+}
 
-      main {
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-        justify-content: space-between;
-        align-items: center;
-        padding-top: 90px;
-      }
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
 
-      .main-title {
-        font-size: clamp(2rem, 6vw, 4rem); 
-        font-weight: 800; 
-        color: #fff; 
-        text-shadow: 0 4px 24px rgba(0,0,0,0.7);
-        text-align: center;
-        margin: 0;
-      }
+main {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: space-between;
+  align-items: center;
+  padding: 90px 20px 30px 20px; /* Added bottom padding to anchor elements lower */
+}
 
-      .player-card {
-        display: flex;
-        flex-direction: column;
-        gap: 18px;
-        border-radius: 24px;
-        padding: 24px;
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(24px);
-        -webkit-backdrop-filter: blur(24px);
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        box-shadow: 0 12px 40px rgba(0,0,0,0.5);
-        width: 100%;
-        max-width: 500px;
-      }
+.main-title {
+  font-size: clamp(1.8rem, 5vw, 3.5rem); 
+  font-weight: 800; 
+  color: #fff; 
+  text-shadow: 0 4px 24px rgba(0,0,0,0.7);
+  text-align: center;
+  margin-top: auto; /* Pushes the title down gracefully */
+  margin-bottom: auto;
+}
 
-      .track-info-row {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-      }
+.player-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-radius: 24px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+  width: 100%;
+  max-width: 480px;
+  margin-bottom: 10px; /* Lowers the card closer to the bottom edge */
+}
 
-      .controls-row {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 28px;
-      }
+.track-info-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
 
-      .control-btn {
-        background: transparent;
-        border: none;
-        color: #fff;
-        cursor: pointer;
-        padding: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: transform 0.2s ease, opacity 0.2s ease;
-        opacity: 0.85;
-      }
+.controls-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
 
-      .control-btn:hover {
-        opacity: 1;
-        transform: scale(1.1);
-      }
-      
-      .control-btn:active {
-        transform: scale(0.95);
-      }
+.control-btn {
+  background: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  opacity: 0.85;
+}
 
-      .control-btn.play-pause {
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 50%;
-        width: 52px;
-        height: 52px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      }
+.control-btn:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
 
-      .progress-container {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        width: 100%;
-      }
+.control-btn:active {
+  transform: scale(0.95);
+}
 
-      .progress-bar {
-        width: 100%;
-        height: 6px;
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 9999px;
-        overflow: hidden;
-        cursor: pointer;
-        position: relative;
-        transition: height 0.2s ease;
-      }
+.control-btn.play-pause {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
 
-      .progress-bar:hover {
-        height: 8px;
-      }
+.progress-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
 
-      .progress-fill {
-        width: 0%;
-        height: 100%;
-        background: #fff;
-        border-radius: 9999px;
-        transition: width 0.1s linear;
-      }
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  transition: height 0.2s ease;
+}
 
-      .time-stamps {
-        display: flex;
-        justify-content: space-between;
-        font-size: 12px;
-        color: rgba(255, 255, 255, 0.7);
-        font-variant-numeric: tabular-nums;
-        font-weight: 500;
-      }
+.progress-bar:hover {
+  height: 8px;
+}
 
-      /* Responsive Adjustments for Mobile */
-      @media (max-width: 600px) {
-        header {
-          padding: 15px 15px;
-        }
-        .header-left {
-          display: none; /* Hide clock on very small screens to save space */
-        }
-        .header-center {
-          font-size: 12px;
-          padding: 6px 12px;
-        }
-        .header-right a {
-          padding: 6px 12px;
-          font-size: 12px;
-        }
-        .player-card {
-          padding: 20px;
-          gap: 14px;
-        }
-        .controls-row {
-          gap: 20px;
-        }
-      }
+.progress-fill {
+  width: 0%;
+  height: 100%;
+  background: #fff;
+  border-radius: 9999px;
+  transition: width 0.1s linear;
+}
+
+.time-stamps {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+}
+
+/* Responsive Adjustments for Mobile */
+@media (max-width: 600px) {
+  header {
+    padding: 12px 15px;
+  }
+  .header-left {
+    display: none; 
+  }
+  .header-center {
+    font-size: 11px;
+    padding: 4px 10px;
+  }
+  .header-right a {
+    padding: 6px 12px;
+    font-size: 11px;
+  }
+  main {
+    padding: 75px 12px 15px 12px; /* Tighter padding for small screens */
+  }
+  .player-card {
+    padding: 16px;
+    gap: 12px;
+    max-width: 100%;
+    margin-bottom: 0px;
+  }
+  .controls-row {
+    gap: 18px;
+  }
+  .control-btn.play-pause {
+    width: 44px;
+    height: 44px;
+  }
+}
